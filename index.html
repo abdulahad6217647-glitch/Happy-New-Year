@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  background:linear-gradient(to top,#020111,#000428);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  color:#fff;
+}
+
+.center{
+  text-align:center;
+  z-index:10;
+}
+
+#time{
+  font-size:42px;
+  font-variant:small-caps;
+  text-shadow:0 0 20px #fff;
+}
+
+#msg{
+  margin-top:18px;
+  font-size:18px;
+  opacity:0.9;
+  font-variant:small-caps;
+}
+
+/* REAL FIREWORK */
+.firework{
+  position:fixed;
+  bottom:-10px;
+  width:3px;
+  height:20px;
+  background:white;
+  animation:shoot 1.5s linear forwards;
+}
+
+@keyframes shoot{
+  to{
+    transform:translateY(-60vh);
+    opacity:0;
+  }
+}
+
+.spark{
+  position:fixed;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:gold;
+  animation:blast 1.3s ease-out forwards;
+}
+
+@keyframes blast{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <div id="time">00:00:00</div>
+  <div id="msg">new year ka intezar...</div>
+</div>
+
+<script>
+/* Pakistan Time */
+function updateClock(){
+  const now=new Date().toLocaleString("en-US",{timeZone:"Asia/Karachi"});
+  const d=new Date(now);
+  let h=String(d.getHours()).padStart(2,"0");
+  let m=String(d.getMinutes()).padStart(2,"0");
+  let s=String(d.getSeconds()).padStart(2,"0");
+  document.getElementById("time").innerText=h+":"+m+":"+s;
+
+  if(h==="00" && m==="00" && s==="00"){
+    window.location.href="page2.html";
+  }
+}
+setInterval(updateClock,1000);
+
+/* REAL FIREWORK FUNCTION */
+function launchFirework(){
+  const fw=document.createElement("div");
+  fw.className="firework";
+  fw.style.left=Math.random()*100+"vw";
+  document.body.appendChild(fw);
+
+  setTimeout(()=>{
+    for(let i=0;i<22;i++){
+      const sp=document.createElement("div");
+      sp.className="spark";
+      sp.style.left=fw.offsetLeft+"px";
+      sp.style.top="40vh";
+      sp.style.background=`hsl(${Math.random()*360},100%,60%)`;
+      sp.style.setProperty("--x",(Math.random()*300-150)+"px");
+      sp.style.setProperty("--y",(Math.random()*300-150)+"px");
+      document.body.appendChild(sp);
+      setTimeout(()=>sp.remove(),1300);
+    }
+    fw.remove();
+  },1400);
+}
+
+setInterval(launchFirework,2600);
+</script>
+
+</body>
+</html>
