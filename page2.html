@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0b0f1a;
+  color:white;
+  font-family:Arial, sans-serif;
+  text-align:center;
+}
+
+#text{
+  max-width:90%;
+  font-size:18px;
+  line-height:1.8;
+  font-variant:small-caps;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div id="text"></div>
+
+<script>
+const lines = [
+"Assalamualaikum…",
+"Umeed hai aap khairiyat se honge 🤍",
+"Yeh naya saal sirf waqt ka badalna nahi…",
+"Yeh ek nayi umeed, nayi soch aur nayi shuruaat hai",
+"Jo guzra… us ne humein mazboot banaya",
+"Aur jo aane wala hai… us par humein yaqeen hai",
+"2026 mein dua hai",
+"Ke dil halka rahe, chehron par muskurahat rahe",
+"Aur zindagi mein sukoon ho",
+"Agar kabhi thakan mehsoos ho",
+"To yaad rakhna… aap akelay nahi ho",
+"Hum hamesha saath hain",
+"Yeh saal mohabbat, samajh aur barkat ka ho",
+"Aur har dua qubooliyat tak pohanche",
+"Allah aapko hamesha apni hifazat mein rakhe",
+"Aur har andheri raat ke baad roshni ata kare",
+"Happy New Year 2026 ✨",
+"Dil se… khuloos se… hamesha ke liye 🤍"
+];
+
+let i = 0;
+const textBox = document.getElementById("text");
+
+function showLine(){
+  textBox.style.opacity = 0;
+
+  setTimeout(()=>{
+    textBox.innerText = lines[i];
+    textBox.style.opacity = 1;
+    i++;
+    if(i >= lines.length) i = lines.length - 1;
+  },1000);
+}
+
+showLine();
+setInterval(showLine,7000);
+</script>
+
+</body>
+</html>
